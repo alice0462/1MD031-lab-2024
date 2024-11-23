@@ -29,27 +29,9 @@
             <label for="E-mail adress">E-mail</label><br>
             <input type="email" id="email" v-model="email" required="required" placeholder="E-mail address">
             </p>
+            
             <p>
-            <label for="Street name">Street name</label><br>
-            <input type="text" id="street" v-model="streetname" required="required" placeholder="Street name">
-            </p>
-            <p>
-            <label for="House number">House number</label><br>
-            <input type="number" id="house" v-model="housenumber" required="required" placeholder="House number" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-            </p>
-            <p>
-              <label for="Payment">Payment option</label>
-              <select id="payment" v-model="payment">
-                <option selected="selected">Credit card</option>
-                <option>Debit card</option>
-                <option>Apple pay</option>
-                <option>PayPal</option>
-              </select>
-            </p>
-            <p>
-              <div>
-                <label for="Gender">Gender</label><br>
-              </div>
+              <div> <label for="Gender">Gender</label><br></div>
               <div>
                 <input type="radio" id="female" v-model="gender" value="female" checked="checked">
                 <label for="female">Female</label>
@@ -62,19 +44,25 @@
                 <input type="radio" id="notprovided" v-model="gender" value="notprovided">
                 <label for="notprovided">Do not wish to provide</label>
               </div>
-                </p>
+            </p>
+              
           </form>
       </section>
 
-    <section class="map-section">
-      <div id="map" v-on:click="addOrder">
-      click here
-      </div>
-    </section>
+  <section class="map-section">
+    <div id="map" v-on:click="addOrder" style="position: relative;">
+    <div
+      class="target"
+      v-bind:style="{ top: location.y + 'px', left: location.x + 'px', position: 'absolute' }" 
+    >
+      T
+    </div>
+  </div>
+</section>
 
       <section class="button-section">
         <div>
-        <button type="submit" v-on:click="markDone(key)">
+        <button type="button" v-on:click="placeOrder">
           <img src="https://img.icons8.com/emoji/48/000000/smiling-face.png" 
             alt="Smiley Face" title="Smiley Face" style="width: 10px;">
             Place my order!
@@ -124,6 +112,7 @@ export default {
     return {
       burgers: menu,
       orderedBurgers: {},
+      location: { x: 0, y: 0 }
     }
   },
   methods: {
@@ -131,23 +120,39 @@ export default {
       return Math.floor(Math.random()*100000);
     },
     addOrder: function (event) {
-      var offset = {x: event.currentTarget.getBoundingClientRect().left,
-                    y: event.currentTarget.getBoundingClientRect().top};
-      socket.emit("addOrder", { orderId: this.getOrderNumber(), /*getOrderNumber*/
-                                details: { x: event.clientX - 10 - offset.x,
-                                           y: event.clientY - 10 - offset.y },
-                                orderItems: ["Beans", "Curry"]
-                              }
-                 );
+      var offset = {
+        x: event.currentTarget.getBoundingClientRect().left,
+        y: event.currentTarget.getBoundingClientRect().top,
+      };
+
+      // Uppdatera platsens koordinater
+      this.location.x = event.clientX - offset.x;
+      this.location.y = event.clientY - offset.y;
+      
     },
-    markDone: function() {
+    setLocation: function (event) {
+      var offset = {
+        x: event.currentTarget.getBoundingClientRect().left,
+        y: event.currentTarget.getBoundingClientRect().top,
+      };
+      this.location.x = event.clientX - offset.x;
+      this.location.y = event.clientY - offset.y;
+    },
+    placeOrder: function () {
+      socket.emit("addOrder", {
+        orderId: this.getOrderNumber(),
+        details: { x: this.location.x, y: this.location.y },
+        orderItems: ["Beans", "Curry"], // Object.keys(this.orderedBurgers)
+      });
+    },
+    markDone: function () {
       this.orderStatus = true;
     },
     addToOrder: function (event) {
       this.orderedBurgers[event.name] = event.amount;
     },
-  }
-}
+  },
+};
 </script>
 
 
