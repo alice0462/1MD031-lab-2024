@@ -1,126 +1,13 @@
-<!DOCTYPE HTML>
+<!DOCTYPE html>
 <html lang="en">
-   <head>
-       <title>Burger Buddies Co</title>
-       <meta charset="utf-8"/>
-       <link rel="stylesheet" type="text/css" href="/css/style.css">
-   </head>
-
-    <body>
-        <header class="header-section">
-            <h1>Burger Buddies Company </h1>
-            <img src="https://cdn.pixabay.com/photo/2016/11/21/16/02/outdoor-dining-1846137_1280.jpg">
-        </header>
-    
-        <main>
-            <section class="burger-section">
-            <h2>Select Burger</h2>
-                <p>Select your Burger Buddie here.</p>
-                <div class="burger-container">
-                    <div class="burger-item">
-                        <h3>
-                            Cheesy Bacon Burger
-                        </h3>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHsg5phnd-Y21zOEzmJyJtgYvTmxRd3GMwXg&s" 
-                        alt="Cheesy Bacon Burger" title="Cheesy Bacon Burger" style="width: 300px">
-                        <ul>
-                            <li>Cheese</li>
-                            <li>Bacon</li>
-                            <li>Ketchup</li>
-                            <li><span id="ingredient">Contains gluten</span></li>
-                        </ul>
-                    </div>
-                    <div class="burger-item">
-                        <h3>
-                            Chicken Spicy Burger
-                        </h3>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlGNtllWpnFyNGU9buKaz6xyBaHO_pj7NIKQ&s" 
-                        alt="Chicken Sausy Burger" title="Chicken Sausy Burger" style="width: 300px">
-                        <ul>
-                            <li>Chicken</li>
-                            <li>Chili</li>
-                            <li>Onion</li>
-                            <li><span id="ingredient">Contains gluten</span></li>
-                        </ul>
-                    </div>
-                    <div class="burger-item">
-                        <h3>
-                            Vego Sausy Burger
-                        </h3>
-                        <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCC0zPeqeRrZaG47z59tiwd_cs9JESSZtPxw&s" 
-                        alt="Vego Sausy Burger" title="Vego Sausy Burger" style="width: 267px">
-                        <ul>
-                            <li>Vego patty</li>
-                            <li>Vego saus</li>
-                            <li>Onion</li>
-                            <li><span id="ingredient">Contains lactose</span></li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
-            <section class="information-section">
-                <h2>Customer information</h2>
-                <p>To deliver your Burger Buddie, we just need a bit of information from you.</p>
-                <h3>
-                    Delivery Information
-                </h3>
-                <form>
-                    <p>
-                        <label for="Full name">Full Name</label><br>
-                        <input type="text" id="fullname" name="fn" required="required" placeholder="First- and Last name">
-                    </p>
-                    <p>
-                        <label for="E-mail adress">E-mail</label><br>
-                        <input type="email" id="email" name="em" required="required" placeholder="E-mail address">
-                    </p>
-                    <p>
-                        <label for="Street name">Street name</label><br>
-                        <input type="text" id="street" name="sn" required="required" placeholder="Street name">
-                    </p>
-                    <p>
-                        <label for="House number">House number</label><br>
-                        <input type="number" id="house" name="hn" required="required" placeholder="House number" oninput="this.value = this.value.replace(/[^0-9]/g, '')">
-                    </p>
-                    <p>
-                        <label for="Payment">Payment option</label><be>
-                        <select id="payment" name="pp">
-                            <option selected="selected">Credit card</option>
-                            <option>Debit card</option>
-                            <option>Apple pay</option>
-                            <option>PayPal</option>
-                        </select>
-                     </p>
-                     <p>
-                        <div>
-                            <label for="Gender">Gender</label><br>
-                        </div>
-                       <div>
-                        <input type="radio" id="female" name="gender" value="female" checked="checked">
-                        <label for="female">Female</label>
-                       </div>
-                       <div>
-                        <input type="radio" id="male" name="gender" value="male">
-                        <label for="male">Male</label>
-                       </div>
-                       <div>
-                        <input type="radio" id="notprovided" name="gender" value="notprovided">
-                        <label for="notprovided">Do not wish to provide</label>
-                       </div>
-                    </p>
-                </form>
-            </section>
-            <section class="button-section">
-                <button type="submit">
-                    <img src="https://img.icons8.com/emoji/48/000000/smiling-face.png" 
-                    alt="Smiley Face" title="Smiley Face" style="width: 10px;">
-                    Place my order!
-                  </button>
-            </section>
-        </main>
-        
-        <footer>
-            <hr>
-            <p>&copy; 2024 Burger Buddies Co.</p>
-        </footer>
-    </body>
+  <head>
+    <meta charset="UTF-8">
+    <link rel="icon" href="/favicon.ico">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vite App</title>
+  </head>
+  <body>
+    <div id="app"></div>
+    <script type="module" src="/src/main.js"></script>
+  </body>
 </html>

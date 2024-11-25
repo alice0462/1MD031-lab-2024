@@ -1,21 +1,21 @@
 [{
-    "name": "Veggie Bliss", 
-    "kCal": 500, 
-    "url": "https://images-bonnier.imgix.net/files/ifo/production/20220412084608/Kødfri-burger-1.jpg?auto=compress,format&w=1024%201024w",
-    "lactose": false, 
-    "gluten": false
+    "name": "Cheesy Bacon Burger", 
+    "kCal": 800, 
+    "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHsg5phnd-Y21zOEzmJyJtgYvTmxRd3GMwXg&s",
+    "gluten": true, 
+    "lactose": true
 },
 {
-    "name": "Veggie Bliss", 
-    "kCal": 500, 
-    "url": "https://images-bonnier.imgix.net/files/ifo/production/20220412084608/Kødfri-burger-1.jpg?auto=compress,format&w=1024%201024w",
-    "lactose": false, 
-    "gluten": false
+    "name": "Chicken Spicy Burger", 
+    "kCal": 600, 
+    "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlGNtllWpnFyNGU9buKaz6xyBaHO_pj7NIKQ&s",
+    "gluten": true, 
+    "lactose": false
 },
 {
-    "name": "Veggie Bliss", 
+    "name": "Vego Saucy Burger", 
     "kCal": 500, 
-    "url": "https://images-bonnier.imgix.net/files/ifo/production/20220412084608/Kødfri-burger-1.jpg?auto=compress,format&w=1024%201024w",
-    "lactose": false, 
-    "gluten": false
+    "url": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCC0zPeqeRrZaG47z59tiwd_cs9JESSZtPxw&s",
+    "gluten": false, 
+    "lactose": true
 }]

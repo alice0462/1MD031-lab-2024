@@ -1,12 +1,17 @@
 <template>
     <div id="orders">
       <div id="orderList">
-        <div v-for="(order, key) in orders" v-bind:key="'order'+key">
-          #{{ key }}: {{ order.orderItems.join(", ") }}
-        </div>
+        <div v-for="(order, key) in orders" v-bind:key="'order'+ key">
+          <p>{{ key }}: {{ order.orderItems}}</p> 
+          <em>{{ order.fullname }}, </em>
+          <em>{{ order.email }}, </em>
+          <em>{{ order.payment }}, </em>
+          <em>{{ order.gender }} </em>
+          <hr>
+      </div>
         <button v-on:click="clearQueue">Clear Queue</button>
       </div>
-      <div id="dots" >
+      <div id="dots">
           <div v-for="(order, key) in orders" v-bind:style="{left: order.details.x + 'px', top: order.details.y + 'px' }" v-bind:key="'dots' + key">
             {{ key }}
           </div>
@@ -22,7 +27,8 @@
     data: function () {
       return {
         orders: null,
-        location: { x: 0, y: 0 }
+        location: { x: 0, y: 0 },
+        orderId: 0
       }
     },
     created: function () {
@@ -32,6 +38,8 @@
     methods: {
       clearQueue: function () {
         socket.emit('clearQueue');
+        this.orders = [];
+        this.orderId = 0;
       },
       changeStatus: function(orderId) {
         socket.emit('changeStatus', {orderId: orderId, status: "Annan status"});

@@ -12,8 +12,8 @@
           <div class="burger-container">
             <Burger v-for="burger in burgers" :key="burger.name" :burger="burger" v-on:orderedBurgers="addToOrder($event)"/> 
           </div>
-
       </section>
+
       <section class="information-section">
         <h2>Customer information</h2>
         <p>To deliver your Burger Buddie, we just need a bit of information from you.</p>
@@ -29,7 +29,15 @@
             <label for="E-mail adress">E-mail</label><br>
             <input type="email" id="email" v-model="email" required="required" placeholder="E-mail address">
             </p>
-            
+            <p>
+              <label for="Payment">Payment option</label>
+              <select id="payment" v-model="payment">
+                <option>Credit card</option>
+                <option>Debit card</option>
+                <option>Apple pay</option>
+                <option>PayPal</option>
+              </select>
+            </p>
             <p>
               <div> <label for="Gender">Gender</label><br></div>
               <div>
@@ -39,6 +47,10 @@
               <div>
                 <input type="radio" id="male" v-model="gender" value="male">
                 <label for="male">Male</label>
+              </div>
+              <div>
+                <input type="radio" id="other" v-model="gender" value="other">
+                <label for="other">Other</label>
               </div>
               <div>
                 <input type="radio" id="notprovided" v-model="gender" value="notprovided">
@@ -95,14 +107,13 @@ function MenuItem(name, pic, kCal, gluten, lactose) {
     this.gluten = gluten;
     this.lactose = lactose;
 }
-/*
+
 const burgers = [
     new MenuItem("Cheesy Bacon Burger", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTHsg5phnd-Y21zOEzmJyJtgYvTmxRd3GMwXg&s", 800, true, true),
     new MenuItem("Chicken Spicy Burger", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTlGNtllWpnFyNGU9buKaz6xyBaHO_pj7NIKQ&s", 600, true, false),
     new MenuItem("Vego Sausy Burger", "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRCC0zPeqeRrZaG47z59tiwd_cs9JESSZtPxw&s", 500, false, true)
 ];
-console.log(burgers); print array to the console????
-*/
+
 export default {
   name: 'HomeView',
   components: {
@@ -112,20 +123,31 @@ export default {
     return {
       burgers: menu,
       orderedBurgers: {},
-      location: { x: 0, y: 0 }
+      location: { x: 0, y: 0 },
+      fullname: "",
+      email: "",
+      payment: "Credit card",
+      gender: "Female",
+      currentOrderNumber: 0
     }
   },
   methods: {
+    
     getOrderNumber: function () {
-      return Math.floor(Math.random()*100000);
+      this.currentOrderNumber += 1;
+      return this.currentOrderNumber;
+      
     },
+    /*getOrderNumber: function () {
+      return Math.floor(Math.random()*100000);
+    },*/
+
     addOrder: function (event) {
       var offset = {
         x: event.currentTarget.getBoundingClientRect().left,
         y: event.currentTarget.getBoundingClientRect().top,
       };
 
-      // Uppdatera platsens koordinater
       this.location.x = event.clientX - offset.x;
       this.location.y = event.clientY - offset.y;
       
@@ -142,7 +164,11 @@ export default {
       socket.emit("addOrder", {
         orderId: this.getOrderNumber(),
         details: { x: this.location.x, y: this.location.y },
-        orderItems: ["Beans", "Curry"], // Object.keys(this.orderedBurgers)
+        orderItems: this.orderedBurgers, // orderItems: ["Beans", "Curry"], orderItems: Object.keys(this.orderedBurgers)
+        fullname: this.fullname,
+        email: this.email,
+        payment: this.payment,
+        gender: this.gender
       });
     },
     markDone: function () {
@@ -151,8 +177,8 @@ export default {
     addToOrder: function (event) {
       this.orderedBurgers[event.name] = event.amount;
     },
-  },
-};
+  }
+}
 </script>
 
 
@@ -246,7 +272,7 @@ nav li {
 
  button:hover {
     background-color: #fff700; 
-    cursor: pointer; /* muspekaren blir en hand */
+    cursor: pointer;
 
  }
 #map {
@@ -261,4 +287,14 @@ nav li {
   overflow: scroll; 
 }
 
+.target {
+  position: absolute;
+  background: black;
+  color: white;
+  border-radius: 10px;
+  width:20px;
+  height:20px;
+  text-align: center;
+
+}
 </style>
